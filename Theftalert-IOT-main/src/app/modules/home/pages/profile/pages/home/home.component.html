@@ -1,0 +1,68 @@
+<section class="container-fluid p-1 p-lg-4 cont">
+  <h1 class="title">{{"PROFILE.title" |translate}}</h1>
+  <div class="cont__profile">
+    <div class="cont__profile__card cont__profile__card--1 shadow">
+      <div class="cont__profile__card__text">
+        <h3 class="text-center subtitle">{{"PROFILE.data.title" |translate}}</h3>
+        <p class=""><strong>{{"PROFILE.data.item1" |translate}} : </strong> {{_sctr.user?.name}}</p>
+        <p class=""><strong>{{"PROFILE.data.item2" |translate}} : </strong> {{_sctr.user?.lastname}}</p>
+        <p class=""><strong>{{"PROFILE.data.item3" |translate}} : </strong> {{_sctr.user?.email}}</p>
+        <p class=""><strong>{{"PROFILE.data.item4" |translate}} : </strong> {{_sctr.user?.password}}</p>
+        <p class=""><strong>{{"PROFILE.data.item5" |translate}} : </strong> {{_sctr.user?.role}}</p>
+      </div>
+      <div class="cont__profile__card__btn">
+        <button mat-raised-button class="cont__profile__card__btn--1" (click)="_sctr.editar(_sctr.user)" data-bs-toggle="modal"data-bs-target="#ModalUser">
+          <mat-icon class="mat-18">edit</mat-icon>{{"PROFILE.data.button.btn1" |translate}}</button>
+        <button mat-raised-button class="cont__profile__card__btn--2" (click)="eliminarcuenta()">
+          <mat-icon class="mat-18">close</mat-icon>{{"PROFILE.data.button.btn2" |translate}}</button>
+      </div>
+    </div>
+    <div class="cont__profile__card cont__profile__card--2 shadow">
+      <div class="img">
+        <img src="assets/icons/logo_san_jose.png" class="card-img-top" alt="">
+      </div>
+      <h2>{{"PROFILE.ins" |translate}}</h2>
+    </div>
+  </div>
+  <div class="twilio shadow" *ngxPermissionsOnly="['ADMIN']"
+  >
+    <h2 class="h1 text-center ">Opciones de administrador</h2>
+    <p class="text-danger">Configure si tiene acceso a <a target="_blank" href="http://www.twilio.com/docs/api/rest">Twilio</a> para cambiar las variables de envío de SMS. Tenga en cuenta que de esto depende el envió de alerta a su dispositivo móvil.</p>
+    <form class="twilio__form"
+    [formGroup]="formu"
+    (ngSubmit)="send()"
+    >
+      <div class="mb-3">
+        <label for="input1" class="form-label">account_sid</label>
+        <input type="text" [class.is-invalid]="formu.get('account_sid')?.invalid" formControlName="account_sid" class="form-control" id="input1" placeholder="">
+      </div>
+      <div class="mb-3">
+        <label for="input2" class="form-label">auth_token</label>
+        <input type="text" [class.is-invalid]="formu.get('auth_token')?.invalid" formControlName="auth_token" class="form-control" id="input2" placeholder="">
+      </div>
+      <div class="mb-3">
+        <label for="input3" class="form-label">from_number</label>
+        <input type="tel" [class.is-invalid]="formu.get('from_number')?.invalid" formControlName="from_number" class="form-control" id="input3" placeholder="">
+      </div>
+      <div class="mb-3">
+        <label for="input4" class="form-label">to_number</label>
+        <input type="tel" [class.is-invalid]="formu.get('to_number')?.invalid" formControlName="to_number" class="form-control" id="input4" placeholder="">
+      </div>
+      <div class="mb-3">
+        <label for="input5" class="form-label">message</label>
+        <input type="text" maxlength="35" [class.is-invalid]="formu.get('message')?.invalid" formControlName="message" class="form-control" id="input5" placeholder="">
+      </div>
+      <div class="twilio__form__btn mb-3">
+        <!-- <button type="button" class="shadow twilio__form__btn--1 btn btn-danger">Cancelar</button> -->
+        <button type="submit" class="shadow twilio__form__btn--2 btn btn-info">Guardar</button>
+      </div>
+    </form>
+  </div>
+</section>
+
+<app-form></app-form>
+
+<ng-template #load>
+  <app-loading></app-loading>
+</ng-template>
+

@@ -1,0 +1,12 @@
+<section class="container p-1 p-lg-4">
+  <h1 class="title">{{"RECORD.title" | translate}}</h1>
+  <ul class="nav nav-tabs">
+    <li class="nav-item">
+      <a class="nav-link" [routerLink]="['/record']"  routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" >Registro de cambios</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" [routerLink]="['/record/activation']"  routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Registro de alertas</a>
+    </li>
+  </ul>
+  <router-outlet></router-outlet>
+</section>
